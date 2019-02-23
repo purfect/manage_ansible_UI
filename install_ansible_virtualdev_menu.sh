@@ -52,20 +52,20 @@ fi
 
 # Wenn der Value-Wert eines ausgewählten Array-Elementes den Substring "ansible_" enthält 
 # wird die dort entsprechende Ansible-Version aktiviert
-if [[ "${arr[$EINGABE]}" == "ansible_dev" ]] ;
+if [[ "${arr[${EINGABE}]}" == "ansible_dev" ]] ;
 then
   /bin/bash -c 'echo "Zum beenden \"exit\" eingeben"';/bin/bash --rcfile ${DEVINSTALLDIR}/hacking/env-setup
-elif [[ "${arr[$EINGABE]}" == *"ansible_"* ]] ;
+elif [[ "${arr[${EINGABE}]}" == *"ansible_"* ]] ;
 then
-  echo -e "${GREEN}${arr[$EINGABE]}${RESET} wird aktiviert..."
+  echo -e "${GREEN}${arr[${EINGABE}]}${RESET} wird aktiviert..."
   # die ausgewählte Ansible-Version wird in einer sub-shell gestartet, darum das /bin/bash am Ende des Befehls
-  /bin/bash -c 'echo "Zum beenden \"exit\" eingeben"';/bin/bash --rcfile ${DEFAULTPATH}/${arr[$EINGABE]}/bin/activate
+  /bin/bash -c 'echo "Zum beenden \"exit\" eingeben"';/bin/bash --rcfile ${DEFAULTPATH}/${arr[${EINGABE}]}/bin/activate
 # Wenn die Abruch-Option ausgewählt wird, wird mit exit 0 beendet
-elif [[ "${arr[$EINGABE]}" == "ende"  ]] ;
+elif [[ "${arr[${EINGABE}]}" == "ende"  ]] ;
 then
   echo -e "[${GREEN}*${RESET}] ENDE (Exit Code 0)"
   exit 0
-elif [[ "${arr[$EINGABE]}" == "install_dev" ]] ;
+elif [[ "${arr[${EINGABE}]}" == "install_dev" ]] ;
 then
   if [ -d "${DEVINSTALLDIR}" ] ; then
     rm -rf ${DEVINSTALLDIR} 
@@ -75,7 +75,7 @@ then
   pip install --user -r ${DEVINSTALLDIR}/requirements.txt;/bin/bash
   exit 0
 # Wenn eine neue Ansible-Version eingerichtet werden soll, wird zuerst gefragt welche Version es sein soll
-elif [[ "${arr[$EINGABE]}" == "neue_version" ]] ;
+elif [[ "${arr[${EINGABE}]}" == "neue_version" ]] ;
 then
   echo "Welche Ansible Version soll eingerichtet werden?"
   read VERSION
